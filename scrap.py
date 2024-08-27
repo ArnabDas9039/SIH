@@ -19,8 +19,8 @@ time.sleep(2)
 username = driver.find_element(By.NAME, 'username')
 password = driver.find_element(By.NAME, 'password')
 
-your_username = 'ArnabDas9039'
-your_password = '@W2w6E+CmS*K)^4'
+your_username = 'deekshaaa_ch'
+your_password = 'gaynigga@69'
 
 username.send_keys(your_username)
 password.send_keys(your_password)
@@ -29,8 +29,8 @@ password.send_keys(Keys.RETURN)
 time.sleep(10)  # Wait for login to complete
 
 # Navigate to your profile
-# driver.get('https://www.instagram.com/' + your_username + '/')
-driver.get('https://www.instagram.com/dassauparna/')
+driver.get('https://www.instagram.com/' + your_username + '/')
+#driver.get('https://www.instagram.com/dassauparna/')
 time.sleep(2)
 
 profile_pic_element = driver.find_element(By.XPATH, '//img[contains(@alt, "profile")]')

@@ -240,5 +240,39 @@ print(len(unique_chatters))
 
 
 
+time.sleep(2)
+follower_close = driver.find_element(By.XPATH, '//div[@role="dialog"]//button')
+follower_close.click()
+
+driver.get('https://www.instagram.com/direct/inbox/?hl=en')
+time.sleep(2)
+
+notify_close = driver.find_element(By.XPATH, '//div[@role="dialog"]//button[2]')
+notify_close.click()
+
+msg_list = driver.find_elements(By.XPATH, '//*[@id="mount_0_0_yt"]/div/div/div/div[2]/div/div/div[1]/div[1]/div[1]/section/main/section/div/div/div/div[1]/div/div[1]/div/div[2]/div/div/div/div/div[2]/div')
+last_height = driver.execute_script("return arguments[0].scrollHeight", msg_list)
+
+while True:
+    driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight',msg_list)
+    time.sleep(2)
+    new_height = driver.execute_script("return arguments[0].scrollHeight", msg_list)
+    if new_height == last_height:
+        break
+    last_height = new_height
+    # msg_user = driver.find_elements(By.XPATH, '//*[@id="mount_0_0_yt"]/div/div/div/div[2]/div/div/div[1]/div[1]/div[1]/section/main/section/div/div/div/div[1]/div/div[2]/div/div/div[1]/div/div/div/div[2]/div/div/div[1]/div/div/div/div/div/div')
+    # msg_height = driver.execute_script("return arguments[0].scrollHeight", msg_user)
+
+    # while True:
+        # driver.execute_script('arguments[0]')
+
+
+chatters = []
+chatting_elements = driver.find_elements(By.XPATH, '//*[@id="mount_0_0_yt"]/div/div/div/div[2]/div/div/div[1]/div[1]/div[1]/section/main/section/div/div/div/div[1]/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div[1]/div/div/div/div/div[2]/div/div[1]/span/span')
+for chatting_element in chatting_elements:
+    name = chatting_element.text
+    chatters.append(name)
+
+print(chatters)
 # Close the browser
 driver.quit()

@@ -22,8 +22,8 @@ password = driver.find_element(By.NAME, 'password')
 
 # your_username = 'iamsatwik_'
 # your_password =  'humming1bird'
-your_username = 'deekshaaa_ch'
-your_password =  'gaynigga@69'
+your_username = 'tridibesh9'
+your_password =  '098jhgcxz'
 
 username.send_keys(your_username)
 password.send_keys(your_password)
@@ -192,6 +192,7 @@ notify_close.click()
 msg_list = driver.find_element(By.XPATH, '//div[@role="list"]/div/div/div')
 last_height = driver.execute_script("return arguments[0].scrollHeight", msg_list)
 chatters = []
+chatters = []
 attempt = 0
 scroll_pause_time = 5
 
@@ -229,7 +230,7 @@ while attempt < 5:
     # msg_height = driver.execute_script("return arguments[0].scrollHeight", msg_user)
 
     # while True:
-        # driver.execute_script('arguments[0]')
+    # driver.execute_script('arguments[0]')
 
     # print(chatting_element.text)
 unique_chatters = set(tuple(chatter.items()) for chatter in chatters)

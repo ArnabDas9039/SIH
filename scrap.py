@@ -32,8 +32,8 @@ password.send_keys(Keys.RETURN)
 time.sleep(10)  # Wait for login to complete
 
 # Navigate to your profile
-# driver.get('https://www.instagram.com/' + your_username + '/')
-# time.sleep(2)
+driver.get('https://www.instagram.com/' + your_username + '/')
+time.sleep(2)
 
 # profile_pic_element = driver.find_element(By.XPATH, '//img[contains(@alt, "profile")]')
 # profile_pic_url = profile_pic_element.get_attribute('src')
@@ -191,7 +191,7 @@ notify_close.click()
 
 msg_list = driver.find_element(By.XPATH, '//div[@role="list"]/div/div/div')
 last_height = driver.execute_script("return arguments[0].scrollHeight", msg_list)
-chatters = set()
+chatters = []
 attempt = 0
 scroll_pause_time = 5
 
@@ -199,8 +199,22 @@ while attempt < 5:
     chatting_elements = msg_list.find_elements(By.XPATH, '//div[@role="listitem"]')
     # chatters.append(chatting_element.text for chatting_element in chatting_elements)
     for chatting_element in chatting_elements:
-        name = chatting_element.text
-        chatters.add(name)
+        chatter_info = {}
+        try:
+            # Extracting username or relevant field
+            chatter_element = chatting_element.find_elements(By.XPATH, './/span[@dir="auto"]')
+            username = chatter_element[0].text
+            chatter_info['username'] = username
+            
+            # Extracting other info, such as message or time (example)
+            message = chatter_element[1].text
+            chatter_info['message'] = message
+            
+        except Exception as e:
+            print(f"Error extracting fields: {e}")
+    
+        # Add the dictionary to the list of chatters
+        chatters.append(chatter_info)
 
     driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight', msg_list)
     time.sleep(scroll_pause_time)
@@ -218,9 +232,11 @@ while attempt < 5:
         # driver.execute_script('arguments[0]')
 
     # print(chatting_element.text)
+unique_chatters = set(tuple(chatter.items()) for chatter in chatters)
+unique_chatters = [dict(chatter) for chatter in unique_chatters]
 
-print(chatters)
-print(len(chatters))
+print(unique_chatters)
+print(len(unique_chatters))
 
 # Close the browser
 driver.quit()

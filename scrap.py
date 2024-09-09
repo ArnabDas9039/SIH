@@ -192,6 +192,7 @@ notify_close.click()
 msg_list = driver.find_element(By.XPATH, '//div[@role="list"]/div/div/div')
 last_height = driver.execute_script("return arguments[0].scrollHeight", msg_list)
 chatters = []
+chatters = []
 attempt = 0
 scroll_pause_time = 5
 
@@ -205,14 +206,14 @@ while attempt < 5:
             chatter_element = chatting_element.find_elements(By.XPATH, './/span[@dir="auto"]')
             username = chatter_element[0].text
             chatter_info['username'] = username
-
+            
             # Extracting other info, such as message or time (example)
             message = chatter_element[1].text
             chatter_info['message'] = message
-
+            
         except Exception as e:
             print(f"Error extracting fields: {e}")
-
+    
         # Add the dictionary to the list of chatters
         chatters.append(chatter_info)
 
